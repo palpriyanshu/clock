@@ -23,22 +23,22 @@ class Clock extends React.Component {
     this.state = { sec: 0, hour: 0, min: 0 };
   }
 
-  componentDidMount() {
-    setInterval(() => {
-      this.setState((state) => {
-        state.sec += 1;
-        if (state.sec > 59) {
-          state.sec = 0;
-          state.min += 1;
-        }
+  updateState(state) {
+    state.sec += 1;
+    if (state.sec > 59) {
+      state.sec = 0;
+      state.min += 1;
+    }
 
-        if (state.min > 59) {
-          state.min = 0;
-          state.hour = (state.hour + 1) % 12;
-        }
-        return state;
-      });
-    }, 1000);
+    if (state.min > 59) {
+      state.min = 0;
+      state.hour = (state.hour + 1) % 12;
+    }
+    return state;
+  }
+
+  componentDidMount() {
+    setInterval(() => this.setState(this.updateState), 10);
   }
 
   createNeedle(unit, id) {
