@@ -1,0 +1,74 @@
+.circle {
+  border: 1px solid black;
+  border-radius: 50%;
+  position: relative;
+  margin-left: 400px;
+}
+
+.centre {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ccc;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 2px 4px -1px black;
+}
+
+.tick {
+  position: absolute;
+  z-index: 2;
+  border: 1px solid #666;
+  height: 8px;
+  left: 50%;
+  transform-origin: 0 150px;
+}
+
+.tick:nth-of-type(5n) {
+  border: 1px solid #222;
+  height: 13px;
+}
+
+.tick:nth-of-type(15n) {
+  border: 2px solid rgb(97, 97, 97);
+  height: 16px;
+}
+
+.hand {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  margin: auto;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
+#secHand {
+  z-index: 4;
+  width: 0;
+  height: 200px;
+  border: 1px solid black;
+}
+
+#minHand {
+  z-index: 5;
+  width: 1px;
+  height: 180px;
+  border: 1.5px solid #444;
+  background-color: #444;
+}
+
+#hourHand {
+  z-index: 6;
+  width: 2px;
+  height: 150px;
+  border: 2.2px solid #555;
+  background-color: #555;
+}
