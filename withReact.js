@@ -1,12 +1,8 @@
 const Circle = (props) => {
-  const style = {
-    width: props.radius,
-    height: props.radius,
-  };
   const centre = React.createElement('div', { className: 'centre' });
   return React.createElement(
     'div',
-    { style, className: 'circle' },
+    { className: 'circle' },
     props.children,
     centre
   );
@@ -21,22 +17,14 @@ const Tick = function (props) {
   });
 };
 
-const getTickCounts = function () {
-  let list = [];
-  for (let index = 1; index <= 60; index++) {
-    list.push(index);
-  }
-  return list;
-};
-
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sec: 0, hr: 0, min: 0 };
+    this.state = { sec: 0, hour: 0, min: 0 };
   }
 
   componentDidMount() {
-    this.interval = setInterval(() => {
+    setInterval(() => {
       this.setState((state) => {
         state.sec += 1;
         if (state.sec > 59) {
@@ -46,34 +34,34 @@ class Clock extends React.Component {
 
         if (state.min > 59) {
           state.min = 0;
-          state.hr = (state.hr + 1) % 12;
+          state.hour = (state.hour + 1) % 12;
         }
         return state;
       });
     }, 1000);
   }
 
+  createNeedle(unit, id) {
+    const style = { transform: `rotate(${unit * 6}deg)` };
+    return React.createElement('div', { style, className: 'hand', id });
+  }
+
   render() {
-    const { sec, min, hr } = this.state;
-    const getStyle = (angle) => ({ transform: `rotate(${angle * 6}deg)` });
-    const seconds = React.createElement('div', {
-      style: getStyle(sec),
-      className: 'hand',
-      id: 'secHand',
-    });
-    const minutes = React.createElement('div', {
-      style: getStyle(min),
-      className: 'hand',
-      id: 'minHand',
-    });
-    const hours = React.createElement('div', {
-      style: getStyle(hr),
-      className: 'hand',
-      id: 'hourHand',
-    });
+    const { sec, min, hour } = this.state;
+    const seconds = this.createNeedle(sec, 'secHand');
+    const minutes = this.createNeedle(min, 'minHand');
+    const hours = this.createNeedle(hour, 'hourHand');
     return React.createElement('div', null, seconds, minutes, hours);
   }
 }
+
+const getTickCounts = function () {
+  let list = [];
+  for (let index = 1; index <= 60; index++) {
+    list.push(index);
+  }
+  return list;
+};
 
 const main = function () {
   const mainContainer = document.getElementById('main_container');
@@ -81,10 +69,9 @@ const main = function () {
     React.createElement(Tick, { id, key: id })
   );
 
-  const clock = React.createElement(Clock);
-
+  const ClockContainer = React.createElement(Clock);
   ReactDOM.render(
-    React.createElement(Circle, { radius: '300px' }, Ticks, clock),
+    React.createElement(Circle, null, Ticks, ClockContainer),
     mainContainer
   );
 };
