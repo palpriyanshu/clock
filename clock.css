@@ -53,19 +53,19 @@
   background-image: linear-gradient(black 50%, transparent 50%);
 }
 
-#secHand {
+.secHand {
   z-index: 4;
   width: 1.5px;
   height: 200px;
 }
 
-#minHand {
+.minHand {
   z-index: 3;
   width: 4px;
   height: 180px;
 }
 
-#hourHand {
+.hourHand {
   z-index: 5;
   width: 6px;
   height: 150px;
