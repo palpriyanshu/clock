@@ -28,7 +28,10 @@ const Needle = function (props) {
 class Clock extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sec: 0, hour: 0, min: 0 };
+    this.state = {};
+    this.state.sec = new Date().getSeconds();
+    this.state.min = new Date().getMinutes();
+    this.state.hour = new Date().getHours() % 12;
   }
 
   updateState(state) {
