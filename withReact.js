@@ -38,7 +38,7 @@ class Clock extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => this.setState(this.updateState), 10);
+    setInterval(() => this.setState(this.updateState), 1000);
   }
 
   createNeedle(unit, id) {
@@ -65,13 +65,13 @@ const getTickCounts = function () {
 
 const main = function () {
   const mainContainer = document.getElementById('main_container');
-  const Ticks = getTickCounts().map((id) =>
+  const ticks = getTickCounts().map((id) =>
     React.createElement(Tick, { id, key: id })
   );
 
-  const ClockContainer = React.createElement(Clock);
+  const clock = React.createElement(Clock);
   ReactDOM.render(
-    React.createElement(Circle, null, Ticks, ClockContainer),
+    React.createElement(Circle, null, ticks, clock),
     mainContainer
   );
 };
